@@ -1,4 +1,4 @@
-#include "ArrayUtil/ArrayView.hpp"
+#include "ArrayUtil/CView.hpp"
 
 #include <array>
 #include <cstdint>
@@ -36,52 +36,28 @@ int main()
 
     // Compile time size + initialize from pointer + mutable
     {
-        ArrayView<uint32_t, testSize> view(testArrayMut.data());
+        CView<uint32_t, testSize> view(testArrayMut.data());
         success &= RunTests("Compile time size + initialize from pointer + mutable", view, testArrayMut);
     }
 
     // Compile time size + initialize from object + mutable
     {
-        ArrayView<uint32_t, testSize> view(testArrayMut);
+        CView<uint32_t, testSize> view(testArrayMut);
         success &= RunTests("Compile time size + initialize from object + mutable", view, testArrayMut);
-    }
-
-    // Run time size + initialize from pointer + mutable
-    {
-        ArrayView<uint32_t> view(testArrayMut.data(), testArrayMut.size());
-        success &= RunTests("Run time size + initialize from pointer + mutable", view, testArrayMut);
-    }
-
-    // Run time size + initialize from object + mutable
-    {
-        ArrayView<uint32_t> view(testArrayMut);
-        success &= RunTests("Run time size + initialize from object + mutable", view, testArrayMut);
     }
 
     std::array<uint32_t, testSize> testArrayConst{1,2,3};
 
     // Compile time size + initialize from pointer + const
     {
-        ArrayView<uint32_t, testSize> view(testArrayConst.data());
+        CView<uint32_t, testSize> view(testArrayConst.data());
         success &= RunTests("Compile time size + initialize from pointer + const", view, testArrayConst);
     }
 
     // Compile time size + initialize from object + const
     {
-        ArrayView<uint32_t, testSize> view(testArrayConst);
+        CView<uint32_t, testSize> view(testArrayConst);
         success &= RunTests("Compile time size + initialize from object + const", view, testArrayConst);
-    }
-
-    // Run time size + initialize from pointer + const
-    {
-        ArrayView<uint32_t> view(testArrayConst.data(), testArrayConst.size());
-        success &= RunTests("Run time size + initialize from pointer + const", view, testArrayConst);
-    }
-
-    // Run time size + initialize from object + const
-    {
-        ArrayView<uint32_t> view(testArrayConst);
-        success &= RunTests("Run time size + initialize from object + const", view, testArrayConst);
     }
 
     if (success)
