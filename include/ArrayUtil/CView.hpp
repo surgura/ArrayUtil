@@ -17,7 +17,6 @@ class CView
 template <typename Element, size_t view_size>
 class CView<Element, view_size>
 {
-protected:
     Element* _data;
 
 public:

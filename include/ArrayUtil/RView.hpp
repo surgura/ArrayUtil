@@ -17,7 +17,6 @@ class RView
 template <typename Element>
 class RView<Element, 1>
 {
-protected:
     Element* _data;
     size_t _size;
 
