@@ -14,3 +14,10 @@ ArrayView<uint32_t, 4> view4(container.data());
 for (auto const& el : view3)
   std::cout << el << std::endl;
 ```
+
+## Wishlist
+- Array container with compile-time size (basically std::array)
+- Array container with run-time size (basically std::vector)
+- The above two for multidimensional arrays
+- Viewing array as a multidimensional array
+- View interface so people can implement their own stuff. (like matrix multiplication?)
