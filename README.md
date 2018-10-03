@@ -35,3 +35,4 @@ for (auto const& el : view2)
 - The above two for multidimensional arrays
 - Viewing array as a multidimensional array
 - View interface so people can implement their own stuff. (like matrix multiplication?)
+- Become RangesTS compatible
