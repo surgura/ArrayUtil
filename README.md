@@ -7,7 +7,7 @@ Everything that is in the library is presented here. Code snippets are non-exhau
 
 ### CView
 Compile-time size single- or multidimensional view over an array. Container can be const or mutable.
-** multidimensional not yet supported **
+**multidimensional not yet supported**
 ```c++
 std::array<uint32_t, 4> container{1,2,3,4};
 CView<uint32_t, 4> const view1(container);
@@ -18,7 +18,7 @@ for (auto const& el : view1)
 
 ### RView
 Run-time size single- or multidimensional view over an array. Container can be const or mutable.
-** multidimensional not yet supported **
+**multidimensional not yet supported**
 ```c++
 std::array<uint32_t, 4> container{1,2,3,4};
 RView<uint32_t> view1(container);
