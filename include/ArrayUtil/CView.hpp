@@ -12,12 +12,6 @@ namespace ArrayUtil {
 template <typename Element, size_t... viewSizes>
 class CViewData
 {
-    // TODO
-};
-
-template <typename Element, size_t viewSize>
-class CViewData<Element, viewSize>
-{
 protected:
     Element* _data;
 
@@ -37,13 +31,6 @@ class CView : public CImpl<CViewData<Element, viewSizes...>, Element, viewSizes.
 {
 public:
     using CImpl<CViewData<Element, viewSizes...>, Element, viewSizes...>::CImpl;
-};
-
-template <typename Element, size_t viewSize>
-class CView<Element, viewSize> : public CImpl<CViewData<Element, viewSize>, Element, viewSize>
-{
-public:
-    using CImpl<CViewData<Element, viewSize>, Element, viewSize>::CImpl;
 };
 
 }

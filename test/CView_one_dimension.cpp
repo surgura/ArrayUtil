@@ -11,15 +11,7 @@ static constexpr size_t testSize = 3;
 template <typename T, typename Owner>
 bool RunTests(std::string const& testName, T& view, Owner& owner)
 {
-    // check data
-    if (!(owner[0] == *view.begin() && owner[1] == *(view.begin()+1) && owner[2] == *(view.begin()+2)))
-    {
-        std::cout << "!!! FAIL !!!" << std::endl;
-        std::cout << "In test '" << testName.c_str() << "':" << std::endl;
-        std::cout << "Viewed data incorrect" << std::endl;
-        return false;
-    }
-
+    // check sizes
     if (view.size() != owner.size())
     {
         std::cout << "!!! FAIL !!!" << std::endl;
@@ -28,7 +20,14 @@ bool RunTests(std::string const& testName, T& view, Owner& owner)
         return false;
     }
 
-    // begin & end, const
+    // check data
+    if (!(owner[0] == *view.begin() && owner[1] == *(view.begin()+1) && owner[2] == *(view.begin()+2)))
+    {
+        std::cout << "!!! FAIL !!!" << std::endl;
+        std::cout << "In test '" << testName.c_str() << "':" << std::endl;
+        std::cout << "Viewed data incorrect" << std::endl;
+        return false;
+    }
 
     // Range-based for loop (just check if it compiles)
     for (auto const& el : view) {}
