@@ -35,6 +35,13 @@ for (auto const& el : view2)
   std::cout << el << std::endl;
 ```
 
+### CArray
+Compile-time size single- or multidimensional array. Has exactly the same interface as CView.
+```c++
+CArray<uint32_t, 3> oneDimension{1,2,3};
+CArray<uint32_t, 1,2,3> threeDimensions{1,2,3,4,5,6};
+```
+
 ## Wishlist
 - Array container with compile-time size (basically std::array)
 - Array container with run-time size (basically std::vector)
