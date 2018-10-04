@@ -2,6 +2,8 @@
     Compile-time size single- or multidimensional array.
 */
 
+// TODO constructor takes initializer list, but this can be smaller than data size. verify size or something at compile time
+
 #pragma once
 
 #include "CImpl.hpp"
@@ -27,7 +29,8 @@ private:
 public:
     CArrayData(std::initializer_list<Element> const& values) :
         CArrayData(values, std::make_index_sequence<arraySize>())
-    {}
+    {
+    }
 };
 
 // workaround because some compilers don't understand fold expressions in template parameters

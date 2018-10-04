@@ -13,6 +13,18 @@ static constexpr size_t testSize3 = 4;
 template <typename T, typename Owner>
 bool RunTests(std::string const& testName, T& view, Owner& owner)
 {
+    CView<uint32_t const, testSize2, testSize3> subview1 = view.At(1);
+    CView<uint32_t const, testSize3> subview2 = subview1.At(1);
+    uint32_t value = subview2.At(1);
+    if (value != owner[1*testSize2*testSize3+1*testSize3+1])
+    {
+        std::cout << "!!! FAIL !!!" << std::endl;
+        std::cout << "In test '" << testName.c_str() << "':" << std::endl;
+        std::cout << "Values don't match" << std::endl;
+        return false;
+    }
+    //uint32_t val = view.At(1,2,3);
+    /*
     // check sizes
     if (view.size() != owner.size())
     {
@@ -32,7 +44,7 @@ bool RunTests(std::string const& testName, T& view, Owner& owner)
     }
 
     // Range-based for loop (just check if it compiles)
-    for (auto const& el : view) {}
+    for (auto const& el : view) {}*/
 
     return true;
 }
@@ -41,7 +53,7 @@ int main()
 {
     bool success = true;
 
-    std::array<uint32_t, testSize1*testSize2*testSize3> testArrayMut{1,2,3,4,5,6,7,8,9};
+    std::array<uint32_t, testSize1*testSize2*testSize3> testArrayMut{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24};
 
     // Compile time size + initialize from pointer + mutable
     {
@@ -55,7 +67,7 @@ int main()
         success &= RunTests("Compile time size + initialize from object + mutable", view, testArrayMut);
     }
 
-    std::array<uint32_t, testSize1*testSize2*testSize3> const testArrayConst{1,2,3};
+    std::array<uint32_t, testSize1*testSize2*testSize3> const testArrayConst{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24};
 
     // Compile time size + initialize from pointer + const
     {
