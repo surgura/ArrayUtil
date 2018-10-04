@@ -21,8 +21,6 @@ class CArrayData<Element, arraySize>
 {
 protected:
     std::array<Element, arraySize> _data;
-    // TODO
-    
 private:
     template <std::size_t... Is>
     CArrayData(std::initializer_list<Element> const& values, std::index_sequence<Is...>) :
@@ -50,8 +48,16 @@ class CArrayData
 {
 protected:
     MultiArrayData<Element, dimensionSizes...> _data;
+private:
+    template <std::size_t... Is>
+    CArrayData(std::initializer_list<Element> const& values, std::index_sequence<Is...>) :
+        _data({*(values.begin() + Is)...}) {}
 public:
-    // TODO
+    CArrayData(std::initializer_list<Element> const& values) :
+        CArrayData(values, std::make_index_sequence<arraySize>())
+    {}
+
+    // TODO nested initializer list constructor
 };
 
 template <typename Element, size_t... dimensionSizes>

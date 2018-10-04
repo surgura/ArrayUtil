@@ -7,9 +7,10 @@
 namespace ArrayUtil {
 
 template <typename Data, typename Element, size_t... view_sizes>
-class CImpl
+class CImpl : public Data
 {
-    // TODO
+public:
+    using Data::Data;
 };
 
 template <typename Data, typename Element, size_t view_size>
