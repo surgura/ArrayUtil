@@ -31,14 +31,29 @@ public:
         CArrayData(values, std::make_index_sequence<arraySize>())
     {
     }
+
+    Element* data() const
+    {
+        return _data.data();
+    }
+
+    Element* data()
+    {
+        return _data.data();
+    }
 };
 
 // workaround because some compilers don't understand fold expressions in template parameters
 namespace CArrayDataInternal {
-    template <size_t... values>
+    template <size_t head, size_t... tail>
     struct TemplateSum
     {
-        static constexpr size_t sum = (values*...);
+        static constexpr size_t sum = head*TemplateSum<tail...>::sum;
+    };
+    template <size_t head>
+    struct TemplateSum<head>
+    {
+        static constexpr size_t sum = head;
     };
 }
 // Array that is the right size to hold the given multidimensional array
@@ -58,6 +73,16 @@ public:
     CArrayData(std::initializer_list<Element> const& values) :
         CArrayData(values, std::make_index_sequence<CArrayDataInternal::TemplateSum<dimensionSizes...>::sum>())
     {}
+
+    Element* data() const
+    {
+        return _data.data();
+    }
+
+    Element* data()
+    {
+        return _data.data();
+    }
 
     // TODO nested initializer list constructor
 };

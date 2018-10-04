@@ -24,6 +24,16 @@ public:
     CViewData(Owner& owner) :
         _data(owner.data())
     {}
+
+    Element* data() const
+    {
+        return _data;
+    }
+
+    Element* data()
+    {
+        return _data;
+    }
 };
 
 template <typename Element, size_t... viewSizes>

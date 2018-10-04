@@ -28,16 +28,6 @@ class CImpl : public Data
 public:
     using Data::Data;
 
-    Element* data() const
-    {
-        return Data::_data;
-    }
-
-    Element* data()
-    {
-        return Data::_data;
-    }
-
     CViewMinusOne At(size_t index)
     {
         return CViewMinusOne(data() + SubViewOffset<viewSizes...>(index)); // TODO offset
@@ -52,13 +42,13 @@ private:
     template <typename Head, typename... Tail>
     Element& AtImpl(Head head, Tail... tail)
     {
-        return At(head);//.At(tail...);
+        return At(head).At(tail...);
     }
 
     template <typename Head, typename... Tail>
     Element& AtImpl(Head head, Tail... tail) const
     {
-        return At(head);//.At(tail...);
+        return At(head).At(tail...);
     }
 public:
 
@@ -90,16 +80,6 @@ public:
     using Data::Data;
 
     using iterator = Element*;
-
-    Element* data() const
-    {
-        return Data::_data;
-    }
-
-    Element* data()
-    {
-        return Data::_data;
-    }
 
     static constexpr std::size_t size()
     {
