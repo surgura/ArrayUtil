@@ -1,6 +1,11 @@
 # ArrayUtil
 A collection of array-like containers and convenience classes such as views over the array. Everything is header-only(just templates). The provided CMake file builds the tests.
 
+## Platforms
+Each release is tested with the newest version of the following compilers:
+- Microsoft Visual C++
+- G++
+- Clang++
 
 ## Content
 Everything that is in the library is presented here. Code snippets are non-exhaustive examples.
