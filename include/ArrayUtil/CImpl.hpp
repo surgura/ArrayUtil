@@ -30,12 +30,12 @@ public:
 
     CViewMinusOne At(size_t index)
     {
-        return CViewMinusOne(data() + SubViewOffset<viewSizes...>(index)); // TODO offset
+        return CViewMinusOne(Data::data() + SubViewOffset<viewSizes...>(index)); // TODO offset
     }
 
     CViewMinusOne At(size_t index) const
     {
-        return CViewMinusOne(data() + SubViewOffset<viewSizes...>(index)); // TODO offset
+        return CViewMinusOne(Data::data() + SubViewOffset<viewSizes...>(index)); // TODO offset
     }
 
 private:
@@ -88,22 +88,22 @@ public:
 
     iterator begin() const
     {
-        return data();
+        return Data::data();
     }
 
     iterator begin()
     {
-        return data();
+        return Data::data();
     }
 
     iterator end() const
     {
-        return data() + size();
+        return Data::data() + size();
     }
 
     iterator end()
     {
-        return data() + size();
+        return Data::data() + size();
     }
 
     Element& At(size_t index)
