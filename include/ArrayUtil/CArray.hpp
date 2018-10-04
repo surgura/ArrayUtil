@@ -5,7 +5,6 @@
 #pragma once
 
 #include "CImpl.hpp"
-
 #include <cstddef>
 #include <initializer_list>
 #include <utility>
