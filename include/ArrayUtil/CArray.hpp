@@ -19,12 +19,14 @@ class CArrayData;
 template <typename Element, size_t arraySize>
 class CArrayData<Element, arraySize>
 {
-    std::array<Element, arraySize> data;
+protected:
+    std::array<Element, arraySize> _data;
     // TODO
     
+private:
     template <std::size_t... Is>
     CArrayData(std::initializer_list<Element> const& values, std::index_sequence<Is...>) :
-        data({*(values.begin() + Is)...}) {}
+        _data({*(values.begin() + Is)...}) {}
 public:
     CArrayData(std::initializer_list<Element> const& values) :
         CArrayData(values, std::make_index_sequence<arraySize>())
@@ -46,7 +48,8 @@ using MultiArrayData = CArrayData<Element, CArrayDataInternal::TemplateSum<dimen
 template <typename Element, size_t... dimensionSizes>
 class CArrayData
 {
-    MultiArrayData<Element, dimensionSizes...> data;
+protected:
+    MultiArrayData<Element, dimensionSizes...> _data;
 public:
     // TODO
 };
@@ -54,6 +57,7 @@ public:
 template <typename Element, size_t... dimensionSizes>
 class CArray : public CImpl<CArrayData<Element, dimensionSizes...>, Element, dimensionSizes...>
 {
+public:
     using CImpl<CArrayData<Element, dimensionSizes...>, Element, dimensionSizes...>::CImpl;
 };
 

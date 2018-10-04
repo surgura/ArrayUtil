@@ -20,6 +20,14 @@ bool RunTests(std::string const& testName, T& view, Owner& owner)
         return false;
     }
 
+    if (view.size() != owner.size())
+    {
+        std::cout << "!!! FAIL !!!" << std::endl;
+        std::cout << "In test '" << testName.c_str() << "':" << std::endl;
+        std::cout << "Sizes don't match" << std::endl;
+        return false;
+    }
+
     // begin & end, const
 
     // Range-based for loop (just check if it compiles)

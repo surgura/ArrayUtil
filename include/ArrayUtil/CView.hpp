@@ -5,66 +5,45 @@
 #pragma once
 
 #include <cstddef>
+#include "CImpl.hpp"
 
 namespace ArrayUtil {
 
-template <typename Element, size_t... view_sizes>
-class CView
+template <typename Element, size_t... viewSizes>
+class CViewData
 {
     // TODO
 };
 
-template <typename Element, size_t view_size>
-class CView<Element, view_size>
+template <typename Element, size_t viewSize>
+class CViewData<Element, viewSize>
 {
+protected:
     Element* _data;
 
 public:
-    CView(Element* data) :
+    CViewData(Element* data) :
         _data(data)
     {}
 
     template <typename Owner>
-    CView(Owner& owner) :
+    CViewData(Owner& owner) :
         _data(owner.data())
     {}
+};
 
-    using iterator = Element*;
+template <typename Element, size_t... viewSizes>
+class CView : public CImpl<CViewData<Element, viewSizes...>, Element, viewSizes...>
+{
+public:
+    using CImpl<CViewData<Element, viewSizes...>, Element, viewSizes...>::CImpl;
+};
 
-    Element* data() const
-    {
-        return _data;
-    }
-
-    Element* data()
-    {
-        return _data;
-    }
-
-    static constexpr std::size_t size()
-    {
-        return view_size; 
-    }
-
-    iterator begin() const
-    {
-        return _data;
-    }
-
-    iterator begin()
-    {
-        return _data;
-    }
-
-    iterator end() const
-    {
-        return _data + size();
-    }
-
-    iterator end()
-    {
-        return _data + size();
-    }
+template <typename Element, size_t viewSize>
+class CView<Element, viewSize> : public CImpl<CViewData<Element, viewSize>, Element, viewSize>
+{
+public:
+    using CImpl<CViewData<Element, viewSize>, Element, viewSize>::CImpl;
 };
 
 }
