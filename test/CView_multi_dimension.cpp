@@ -6,7 +6,9 @@
 
 using namespace ArrayUtil;
 
-static constexpr size_t testSize = 3;
+static constexpr size_t testSize1 = 3;
+static constexpr size_t testSize2 = 2;
+static constexpr size_t testSize3 = 4;
 
 template <typename T, typename Owner>
 bool RunTests(std::string const& testName, T& view, Owner& owner)
@@ -39,31 +41,31 @@ int main()
 {
     bool success = true;
 
-    std::array<uint32_t, testSize> testArrayMut{1,2,3};
+    std::array<uint32_t, testSize1*testSize2*testSize3> testArrayMut{1,2,3,4,5,6,7,8,9};
 
     // Compile time size + initialize from pointer + mutable
     {
-        CView<uint32_t, testSize> view(testArrayMut.data());
+        CView<uint32_t, testSize1, testSize2, testSize3> view(testArrayMut.data());
         success &= RunTests("Compile time size + initialize from pointer + mutable", view, testArrayMut);
     }
 
     // Compile time size + initialize from object + mutable
     {
-        CView<uint32_t, testSize> view(testArrayMut);
+        CView<uint32_t, testSize1, testSize2, testSize3> view(testArrayMut);
         success &= RunTests("Compile time size + initialize from object + mutable", view, testArrayMut);
     }
 
-    std::array<uint32_t, testSize> const testArrayConst{1,2,3};
+    std::array<uint32_t, testSize1*testSize2*testSize3> const testArrayConst{1,2,3};
 
     // Compile time size + initialize from pointer + const
     {
-        CView<uint32_t const, testSize> view(testArrayConst.data());
+        CView<uint32_t const, testSize1, testSize2, testSize3> view(testArrayConst.data());
         success &= RunTests("Compile time size + initialize from pointer + const", view, testArrayConst);
     }
 
     // Compile time size + initialize from object + const
     {
-        CView<uint32_t const, testSize> view(testArrayConst);
+        CView<uint32_t const, testSize1, testSize2, testSize3> view(testArrayConst);
         success &= RunTests("Compile time size + initialize from object + const", view, testArrayConst);
     }
 
