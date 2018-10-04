@@ -13,8 +13,8 @@ static constexpr size_t testSize3 = 4;
 template <typename T, typename Owner>
 bool RunTests(std::string const& testName, T& view, Owner& owner)
 {
-    CView<uint32_t const, testSize2, testSize3> subview1 = view.At(1);
-    CView<uint32_t const, testSize3> subview2 = subview1.At(1);
+    auto subview1 = view.At(1);
+    auto subview2 = subview1.At(1);
     uint32_t value = subview2.At(1);
     if (value != owner[1*testSize2*testSize3+1*testSize3+1])
     {
