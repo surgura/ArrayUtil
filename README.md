@@ -1,5 +1,5 @@
 # ArrayUtil
-A collection of array-like containers and convenience classes such as views over the array. Everything is header-only(just templates). Tests are provided as well as a cmake build file.
+A collection of array-like containers and convenience classes such as views over the array. Everything is header-only(just templates). The provided CMake file builds the tests.
 
 
 ## Content
