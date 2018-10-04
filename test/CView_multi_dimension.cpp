@@ -23,6 +23,14 @@ bool RunTests(std::string const& testName, T& view, Owner& owner)
         std::cout << "Values don't match" << std::endl;
         return false;
     }
+
+    if (view[1][1][1] != owner[1*testSize2*testSize3+1*testSize3+1])
+    {
+        std::cout << "!!! FAIL !!!" << std::endl;
+        std::cout << "In test '" << testName.c_str() << "':" << std::endl;
+        std::cout << "Array index fail" << std::endl;
+        return false;
+    }
     //uint32_t val = view.At(1,2,3);
     /*
     // check sizes

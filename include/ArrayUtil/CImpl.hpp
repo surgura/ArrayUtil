@@ -43,9 +43,20 @@ public:
         return CViewMinusOne(data() + SubViewOffset<viewSizes...>(index)); // TODO offset
     }
 
+    CViewMinusOne At(size_t index) const
+    {
+        return CViewMinusOne(data() + SubViewOffset<viewSizes...>(index)); // TODO offset
+    }
+
 private:
     template <typename Head, typename... Tail>
     Element& AtImpl(Head head, Tail... tail)
+    {
+        return At(head);//.At(tail...);
+    }
+
+    template <typename Head, typename... Tail>
+    Element& AtImpl(Head head, Tail... tail) const
     {
         return At(head);//.At(tail...);
     }
@@ -54,6 +65,21 @@ public:
     Element& At(as<size_t, viewSizes>... indices)
     {
         AtImpl(indices...);
+    }
+
+    Element& At(as<size_t, viewSizes>... indices) const
+    {
+        AtImpl(indices...);
+    }
+
+    CViewMinusOne operator[](size_t index)
+    {
+        return At(index);
+    }
+
+    CViewMinusOne operator[](size_t index) const
+    {
+        return At(index);
     }
 };
 
@@ -108,6 +134,16 @@ public:
     Element& At(size_t index) const
     {
         return *(begin() + index);
+    }
+
+    Element& operator[](size_t index)
+    {
+        return At(index);
+    }
+
+    Element& operator[](size_t index) const
+    {
+        return At(index);
     }
 };
 
