@@ -43,9 +43,8 @@ CArray<uint32_t, 1,2,3> threeDimensions{1,2,3,4,5,6};
 ```
 
 ## Wishlist
-- Array container with compile-time size (basically std::array)
-- Array container with run-time size (basically std::vector)
-- The above two for multidimensional arrays
-- Viewing array as a multidimensional array
+- Array container with run-time size (basically std::vector without resizing)
 - View interface so people can implement their own stuff. (like matrix multiplication?)
-- Become RangesTS compatible
+- Resizable multidimensional container (multidimensional std::vector)
+- Become RangesTS compatible once it's out.
+- Use Concepts once they're out.
