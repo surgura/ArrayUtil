@@ -10,5 +10,6 @@ include_directories(include)
 
 # build tests
 add_executable(CView_one_dimension test/CView_one_dimension.cpp)
+add_executable(CView_multi_dimension test/CView_multi_dimension.cpp)
 add_executable(RView_one_dimension test/RView_one_dimension.cpp)
 add_executable(CArray test/CArray.cpp)

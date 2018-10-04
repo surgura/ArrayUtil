@@ -46,17 +46,17 @@ int main()
         success &= RunTests("Compile time size + initialize from object + mutable", view, testArrayMut);
     }
 
-    std::array<uint32_t, testSize> testArrayConst{1,2,3};
+    std::array<uint32_t, testSize> const testArrayConst{1,2,3};
 
     // Compile time size + initialize from pointer + const
     {
-        RView<uint32_t> view(testArrayConst.data(), testArrayConst.size());
+        RView<uint32_t const> view(testArrayConst.data(), testArrayConst.size());
         success &= RunTests("Compile time size + initialize from pointer + const", view, testArrayConst);
     }
 
     // Compile time size + initialize from object + const
     {
-        RView<uint32_t> view(testArrayConst);
+        RView<uint32_t const> view(testArrayConst);
         success &= RunTests("Compile time size + initialize from object + const", view, testArrayConst);
     }
 
