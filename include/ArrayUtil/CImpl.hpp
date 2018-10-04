@@ -10,15 +10,15 @@ namespace ArrayUtil {
 template <typename Element, size_t... viewSizes>
 class CView;
 
-template <typename Data, typename Element, size_t... view_sizes>
+template <typename Data, typename Element, size_t... viewSizes>
 class CImpl : public Data
 {
     template<typename As, std::size_t>
     using as = As;
 
-    template<size_t head, size_t... tail>
-    using CViewMinusOneImpl = CView<Element, tail...>;
-    using CViewMinusOne = CViewMinusOneImpl<view_sizes>;
+    template <size_t head, size_t... tail>
+    struct CViewMinusOneImpl { using type = CView<Element, tail...>; };
+    using CViewMinusOne = typename CViewMinusOneImpl<viewSizes...>::type;
 
     template<size_t head, size_t... tail>
     static constexpr size_t SubViewOffset(size_t index)
@@ -30,35 +30,35 @@ public:
 
     Element* data() const
     {
-        return _data;
+        return Data::_data;
     }
 
     Element* data()
     {
-        return _data;
+        return Data::_data;
     }
 
     CViewMinusOne At(size_t index)
     {
-        return CViewMinusOne(_data + SubViewOffset<view_sizes...>(index)); // TODO offset
+        return CViewMinusOne(data() + SubViewOffset<viewSizes...>(index)); // TODO offset
     }
 
 private:
-    template <typename head, typename... tail>
-    Element& AtImpl(head, tail...)
+    template <typename Head, typename... Tail>
+    Element& AtImpl(Head head, Tail... tail)
     {
-        At(head).At(tail...);
+        return At(head);//.At(tail...);
     }
 public:
 
-    Element& At(as<size_t, view_sizes>... indices)
+    Element& At(as<size_t, viewSizes>... indices)
     {
         AtImpl(indices...);
     }
 };
 
-template <typename Data, typename Element, size_t view_size>
-class CImpl<Data, Element, view_size> : public Data
+template <typename Data, typename Element, size_t viewSize>
+class CImpl<Data, Element, viewSize> : public Data
 {
 public:
     using Data::Data;
@@ -67,37 +67,37 @@ public:
 
     Element* data() const
     {
-        return _data;
+        return Data::_data;
     }
 
     Element* data()
     {
-        return _data;
+        return Data::_data;
     }
 
     static constexpr std::size_t size()
     {
-        return view_size; 
+        return viewSize; 
     }
 
     iterator begin() const
     {
-        return _data;
+        return data();
     }
 
     iterator begin()
     {
-        return _data;
+        return data();
     }
 
     iterator end() const
     {
-        return _data + size();
+        return data() + size();
     }
 
     iterator end()
     {
-        return _data + size();
+        return data() + size();
     }
 
     Element& At(size_t index)

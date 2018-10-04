@@ -56,7 +56,7 @@ private:
         _data({*(values.begin() + Is)...}) {}
 public:
     CArrayData(std::initializer_list<Element> const& values) :
-        CArrayData(values, std::make_index_sequence<arraySize>())
+        CArrayData(values, std::make_index_sequence<CArrayDataInternal::TemplateSum<dimensionSizes...>::sum>())
     {}
 
     // TODO nested initializer list constructor
