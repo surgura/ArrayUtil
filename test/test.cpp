@@ -11,9 +11,14 @@ protected:
 
 int main()
 {
-    static_base<tmpdata, int, 1> impl;
+    static_base<tmpdata, int, 2> impl;
     int x = impl.at(0);
     std::cout << x << std::endl;
+
+    for (int& i : impl)
+    {
+        std::cout << i << std::endl;
+    }
 
     return 0;
 }
