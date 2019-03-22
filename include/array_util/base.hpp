@@ -21,12 +21,12 @@ public:
 
     // If 1D: Get element
     // If nD: Get subview in lowest dimension
-    auto at(std::size_t index)
+    decltype(auto) at(std::size_t index)
     {
         // if tail is empty, we are 1D.
         if constexpr(sizeof...(dimension_sizes_tail) == 0)
         {
-            return *(data::data() + index);
+            return (data::data()[index]);
         }
         else
         {
@@ -36,12 +36,12 @@ public:
         }
     }
 
-    auto at(std::size_t index) const
+    decltype(auto) at(std::size_t index) const
     {
         // if tail is empty, we are 1D.
         if constexpr(sizeof...(dimension_sizes_tail) == 0)
         {
-            return *(data::data() + index);
+            return (data::data()[index]);
         }
         else
         {
