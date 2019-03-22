@@ -5,18 +5,17 @@
 #include <type_traits>
 
 template<typename element, std::size_t... dimension_sizes>
-class static_view
+class comptime_view;
+
+namespace array_util::detail
 {
-    element* data;
-public:
-    static_view(element* data) :
-        data(data) {}
-};
 
 template<typename data, typename element, std::size_t dimension_sizes_head, std::size_t... dimension_sizes_tail>
-class static_base : protected data
+class comptime_base : protected data
 {
 public:
+    using data::data;
+
     // TODO currently iterating only works for 1D
     using iterator = element*;
 
@@ -31,7 +30,7 @@ public:
         }
         else
         {
-            return static_view<element, dimension_sizes_tail...>(
+            return comptime_view<element, dimension_sizes_tail...>(
                 data::data() + index*(dimension_sizes_tail*...)
             );
         }
@@ -46,7 +45,7 @@ public:
         }
         else
         {
-            return static_view<element, dimension_sizes_tail...>(
+            return comptime_view<element, dimension_sizes_tail...>(
                 data::data() + index*(dimension_sizes_tail*...)
             );
         }
@@ -90,5 +89,7 @@ public:
         }
     }
 };
+
+}
 
 #endif
