@@ -1,7 +1,7 @@
 #ifndef ARRAY_UTIL_COMPTIME_ARRAY
 #define ARRAY_UTIL_COMPTIME_ARRAY
 
-#include "base.hpp"
+#include "comptime_base.hpp"
 #include <array>
 
 namespace array_util {
